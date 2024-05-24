@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using Microsoft.Net.Http.Headers;
 
 namespace LoncotesLibrary.Models.DTOs;
@@ -15,4 +16,6 @@ public class CheckoutDTO
     [Required]
     public DateTime CheckoutDate { get; set; }
     public DateTime? ReturnDate { get; set; }
+    private static decimal _lateFeePerDay = .50M;
+
 }
