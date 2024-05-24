@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LoncotesLibrary.Migrations
 {
     [DbContext(typeof(LoncotesLibraryDbContext))]
-    partial class LoncotesLibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240523164229_Checkouts")]
+    partial class Checkouts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,7 +322,7 @@ namespace LoncotesLibrary.Migrations
                             Address = "6387 Cote D'Ivoire Ave",
                             Email = "kudzumustdie@invasive.com",
                             FirstName = "Eki",
-                            IsActive = true,
+                            IsActive = false,
                             LastName = "Kurzmann"
                         });
                 });
@@ -333,7 +336,7 @@ namespace LoncotesLibrary.Migrations
                         .IsRequired();
 
                     b.HasOne("LoncotesLibrary.Models.Patron", "Patron")
-                        .WithMany("Checkouts")
+                        .WithMany()
                         .HasForeignKey("PatronId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -363,11 +366,6 @@ namespace LoncotesLibrary.Migrations
                 });
 
             modelBuilder.Entity("LoncotesLibrary.Models.Material", b =>
-                {
-                    b.Navigation("Checkouts");
-                });
-
-            modelBuilder.Entity("LoncotesLibrary.Models.Patron", b =>
                 {
                     b.Navigation("Checkouts");
                 });
